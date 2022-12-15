@@ -1,0 +1,17 @@
+<head>
+    
+</head>
+
+<body>
+    <canvas id="canvas" style="width: 100%; height: 100%"></canvas>
+    <script src="./debug.js"></script>
+    <script type="module">
+        let name=`debug`;
+        WebAssembly.compileStreaming(fetch(`${name}.wasm`)).then(module => {
+            wasm[`${name}`].instantiate(module).then(exports => {
+                Object.assign(window, { math: exports });
+                console.log(math.add(2, 5),math.getLinePoint(0,0,1,1,100,{x:0,y:0}))
+            })
+        });
+    </script>
+</body>
